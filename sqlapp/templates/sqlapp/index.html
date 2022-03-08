@@ -1,0 +1,41 @@
+
+{% block title %}
+    Database Project by Artiom Dolghi
+{% endblock %}
+
+{% block body %}
+
+    <form action="{% url 'search' %}">
+        <input class="search" type="text" name="q" placeholder="Enter query to search the database" size="45">
+    </form>
+
+    <h1>{{ table_name }}</h1>
+
+    <table>
+
+        <tr>
+            {% for x in columns %}
+                <th>{{ x }}</th>
+            {% endfor %}
+        </tr>
+
+    {% for x in myresult %}
+        <tr>
+            {% for i in x %}
+                <td>{{ i }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+
+    </table>
+
+    <br>
+
+    <form action="{% url 'insert' %}" method="POST">
+        {% csrf_token %}
+        <textarea class="text" cols="46" rows ="5" name="p" id="p" placeholder="Enter query to alter the database"></textarea>
+        <br>
+        <input type="submit" name="pb" value="Submit">
+    </form>
+
+{% endblock %}
